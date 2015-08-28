@@ -1,4 +1,5 @@
 defmodule ListOperationsTest do
+  require Integer
   import ElixirExamples.ListOperations
   use ExUnit.Case
 
@@ -21,19 +22,25 @@ defmodule ListOperationsTest do
 
   test "returns the product of all elements" do
     list = [1, 2, 3, 4, 5]
-    expected = 123
+    expected = 120
 
     assert product(list) == expected
   end
 
   # all?
   test "returns True for an empty list" do
-    assert all?(&Integer.is_odd?/1, [])
+    assert all?(&Integer.is_odd/1, [])
   end
 
-  test "returns True for an empty list" do
+  test "returns True for an List with odd numbers" do
     list_of_odd_numbers = [1, 3, 5, 7, 9]
 
-    assert all?(&Integer.is_odd?/1, list_of_odd_numbers)
+    assert all?(&Integer.is_odd/1, list_of_odd_numbers)
+  end
+
+  test "returns false for an List with non odd numbers" do
+    list = [1, 2, 3, 4, 5, 6]
+
+    refute all?(&Integer.is_odd/1, list)
   end
 end
